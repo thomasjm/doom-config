@@ -92,12 +92,6 @@
 (global-set-key (kbd "M-j") 'iflipb-next-buffer)
 (global-set-key (kbd "M-k") 'iflipb-previous-buffer)
 
-(setq company-bg-color (face-attribute 'default :background))
-
-(custom-set-faces
- '(helm-selection ((t :background "gray25" :distant-foreground "black" :foreground "white smoke")))
- )
-
 (global-set-key (kbd "<S-left>") 'windmove-left)
 (global-set-key (kbd "<S-right>") 'windmove-right)
 (global-set-key (kbd "<S-up>") 'windmove-up)
@@ -156,5 +150,31 @@ import" nil t)
   ;; Helm buffer sort order is crazy without this; see
   ;; https://github.com/emacs-helm/helm/issues/1492
   (defun helm-buffers-sort-transformer@donot-sort (_ candidates _) candidates)
+
+  ;; Make helm buffers sorted by recentness
   (advice-add 'helm-buffers-sort-transformer :around 'helm-buffers-sort-transformer@donot-sort)
+
+  ;; Default green selection color is hideous
+  (custom-set-faces
+   '(helm-selection ((t :background "gray25" :distant-foreground "black" :foreground "white smoke")))
+   )
+  )
+
+(after! company
+  (setq company-bg-color (face-attribute 'default :background))
+
+  (custom-set-faces
+   '(company-preview-common ((t (:background "#21e824bc35b0"))))
+   '(company-scrollbar-bg ((t (:background "#2bd12f784561"))))
+   '(company-scrollbar-fg ((t (:background "#21e824bc35b0"))))
+   '(company-tooltip ((t (:inherit default :background "#1bf61e4b2c46"))))
+   '(company-tooltip-annotation ((t (:foreground "deep sky blue"))))
+   '(company-tooltip-annotation-selection ((t (:inherit company-tooltip-annotation :foreground "deep sky blue" :weight bold))))
+   '(company-tooltip-common ((t (:inherit font-lock-constant-face))))
+   '(company-tooltip-selection ((t (:inherit font-lock-function-name-face))))
+   )
+  )
+
+(after! javascript
+  (define-key typescript-mode-map (kbd "C-j") 'newline-and-indent)
   )
