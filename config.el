@@ -52,9 +52,6 @@
 (whole-line-or-region-mode)
 (global-subword-mode)
 
-;; helm-swoop
-(global-set-key (kbd "C-c o") 'helm-swoop)
-
 ;; projectile-helm-ag
 (defun projectile-helm-ag (arg)
   "Run helm-do-ag relative to the project root.  Or, with prefix arg ARG, relative to the current directory."
@@ -82,6 +79,9 @@
 
 ;; projectile-find-file
 (global-set-key (kbd "C-t") 'projectile-find-file)
+(after! dired
+  (define-key dired-mode-map (kbd "C-t") 'projectile-find-file)
+  )
 
 ;; projectile-find-file
 (global-set-key (kbd "M-;") 'whole-line-or-region-comment-dwim)
@@ -127,10 +127,6 @@ import" nil t)
 (after! smartparens
   (load "/home/tom/doom-config/my-smartparens.el")
   )
-;; (add-to-list 'completion-styles 'flex)
-;; (setq completion-styles '(flex))
-
-;; (setq helm-completion-style 'helm-fuzzy)
 
 (global-set-key (kbd "M-z") 'zap-up-to-char)
 
@@ -139,10 +135,6 @@ import" nil t)
 (global-set-key (kbd "C-a") 'beginning-of-line)
 
 (global-visual-line-mode)
-
-(after! javascript
-  (setq typescript-indent-level 2)
-  )
 
 ;; (speedbar-add-supported-extension ".hs")
 
@@ -158,10 +150,23 @@ import" nil t)
   (custom-set-faces
    '(helm-selection ((t :background "gray25" :distant-foreground "black" :foreground "white smoke")))
    )
+
+  (defun helm-find-files-in-root ()
+    "Open helm-find-files in the current project root."
+    (interactive)
+    (helm-find-files-1 (doom-project-root))
+    )
+  (global-set-key (kbd "C-c C-f") 'helm-find-files-in-root)
+
+  ;; (add-to-list 'completion-styles 'flex)
+  ;; (setq completion-styles '(flex))
+  ;; (setq helm-completion-style 'helm-fuzzy)
   )
 
 (after! company
   (setq company-bg-color (face-attribute 'default :background))
+
+  (add-to-list 'company-backends 'company-files)
 
   (custom-set-faces
    '(company-preview-common ((t (:background "#21e824bc35b0"))))
@@ -175,6 +180,46 @@ import" nil t)
    )
   )
 
-(after! javascript
+(after! typescript-mode
   (define-key typescript-mode-map (kbd "C-j") 'newline-and-indent)
+  (setq typescript-indent-level 2)
+  (setq js-indent-level 2)
   )
+
+(after! web-mode
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-markup-indent-offset 3)
+  (define-key web-mode-map (kbd "M-/") nil)
+  (define-key web-mode-map (kbd "TAB") 'indent-for-tab-command)
+  )
+
+(after! helm-swoop
+  (global-set-key (kbd "C-c C-o") 'helm-swoop)
+  )
+
+(defun nautilus ()
+  "Open nautilus in the current directory."
+  (interactive)
+  (if (use-region-p)
+      (let ((path (buffer-substring (region-beginning) (region-end))))
+        (if (file-name-absolute-p path)
+            (shell-command (concat "nautilus " path))
+          (shell-command "nautilus .")
+          ))
+    (shell-command "nautilus .")
+    ))
+
+(define-key global-map "\M-*" 'pop-tag-mark)
+
+(global-set-key (kbd "C-<left>") 'back-button-global-backward)
+(global-set-key (kbd "C-<right>") 'back-button-global-forward)
+
+(after! smartparens-mode
+  (define-key sp-keymap (kbd "C-<left>") 'back-button-global-backward)
+  (define-key sp-keymap (kbd "C-<right>") 'back-button-global-forward)
+  )
+
+(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "S-C-<down>") 'shrink-window)
+(global-set-key (kbd "S-C-<up>") 'enlarge-window)

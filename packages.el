@@ -7,3 +7,6 @@
 (package! helm-swoop)
 (package! w3m)
 (package! zoom-window)
+(package! back-button)
+;; (package! auto-highlight-symbol-hydra :recipe '(:host github
+;;                                                 :repo "bgwines/auto-highlight-symbol-hydra"))
