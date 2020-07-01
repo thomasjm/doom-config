@@ -20,6 +20,7 @@
 (global-set-key (kbd "M-?") 'mark-paragraph)
 (global-set-key (kbd "C-h") 'delete-backward-char)
 (global-set-key (kbd "M-h") 'backward-kill-word)
+(global-set-key (kbd "C-M-h") 'backward-kill-sexp)
 
 ;; ace-jump-mode
 (global-set-key (kbd "C-0") 'ace-jump-mode)
@@ -191,6 +192,7 @@ import" nil t)
   (setq web-mode-markup-indent-offset 3)
   (define-key web-mode-map (kbd "M-/") nil)
   (define-key web-mode-map (kbd "TAB") 'indent-for-tab-command)
+  (define-key emmet-mode-keymap (kbd "TAB") 'indent-for-tab-command)
   )
 
 (after! helm-swoop
