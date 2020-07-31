@@ -140,13 +140,6 @@ import" nil t)
 ;; (speedbar-add-supported-extension ".hs")
 
 (after! helm
-  ;; Helm buffer sort order is crazy without this; see
-  ;; https://github.com/emacs-helm/helm/issues/1492
-  (defun helm-buffers-sort-transformer@donot-sort (_ candidates _) candidates)
-
-  ;; Make helm buffers sorted by recentness
-  (advice-add 'helm-buffers-sort-transformer :around 'helm-buffers-sort-transformer@donot-sort)
-
   ;; Default green selection color is hideous
   (custom-set-faces
    '(helm-selection ((t :background "gray25" :distant-foreground "black" :foreground "white smoke")))
@@ -162,6 +155,10 @@ import" nil t)
   ;; (add-to-list 'completion-styles 'flex)
   ;; (setq completion-styles '(flex))
   ;; (setq helm-completion-style 'helm-fuzzy)
+  )
+
+(after! (:and helm helm-buffers)
+  (setq! helm-buffers-sort-fn #'helm-fuzzy-matching-sort-fn-preserve-ties-order)
   )
 
 (after! company
