@@ -83,6 +83,7 @@
 (global-set-key (kbd "C-t") 'projectile-find-file)
 (after! dired
   (define-key dired-mode-map (kbd "C-t") 'projectile-find-file)
+  (setq! dired-listing-switches "-ahl -v")
   )
 
 ;; projectile-find-file
