@@ -104,27 +104,25 @@
   (setq haskell-interactive-popup-errors nil)
   (setq haskell-process-suggest-remove-import-lines nil)
   (define-key haskell-mode-map (kbd "C-c C-d") 'haskell-w3m-open-haddock)
+  )
 
-  (define-key haskell-mode-map (kbd "C-x C-s")
-    (lambda ()
-      (interactive)
-      (save-excursion
-        (beginning-of-buffer)
-        ;; Sort the initial import block
-        (when (search-forward "import" nil t)
-          (beginning-of-line)
-          (haskell-sort-imports)
-          )
-
-        ;; Sort any following import blocks
-        (while (search-forward "
-
+(add-hook! 'haskell-mode-hook
+  (defun haskell-sort-imports()
+    (interactive)
+    (save-excursion
+      (beginning-of-buffer)
+      ;; Sort the initial import block
+      (when (search-forward "import" nil t)
+        (beginning-of-line)
+        (haskell-sort-imports)
+        )
+      ;; Sort any following import blocks
+      (while (search-forward "
 import" nil t)
-          (beginning-of-line)
-          (haskell-sort-imports)
-          ))
-
-      (save-buffer)))
+        (beginning-of-line)
+        (haskell-sort-imports)
+        ))
+    )
   )
 
 (after! smartparens
