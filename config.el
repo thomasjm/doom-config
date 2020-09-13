@@ -125,6 +125,13 @@ import" nil t)
     )
   )
 
+(after! ibuffer-vc
+  (add-hook! 'ibuffer-hook
+    (lambda ()
+      (ibuffer-vc-set-filter-groups-by-vc-root)
+      (unless (eq ibuffer-sorting-mode 'alphabetic)
+        (ibuffer-do-sort-by-alphabetic)))))
+
 (after! smartparens
   (load "/home/tom/doom-config/my-smartparens.el")
   )
