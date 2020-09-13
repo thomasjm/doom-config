@@ -21,6 +21,7 @@
 (global-set-key (kbd "C-h") 'delete-backward-char)
 (global-set-key (kbd "M-h") 'backward-kill-word)
 (global-set-key (kbd "C-M-h") 'backward-kill-sexp)
+(global-set-key (kbd "C-j") 'newline-and-indent)
 
 ;; ace-jump-mode
 (global-set-key (kbd "C-0") 'ace-jump-mode)
@@ -179,7 +180,6 @@ import" nil t)
   )
 
 (after! typescript-mode
-  (define-key typescript-mode-map (kbd "C-j") 'newline-and-indent)
   (setq typescript-indent-level 2)
   (setq js-indent-level 2)
   )
