@@ -191,6 +191,12 @@ import" nil t)
   (setq js-indent-level 2)
   )
 
+(after! (:and flycheck typescript-mode) ;; typescript-tsx-mode
+  (message "SETTING UP TSX MODE STUFF")
+  ;; (flycheck-add-mode 'tsx-tide 'typescript-tsx-mode)
+  ;; (add-hook 'typescript-tsx-mode-hook (lambda () (flycheck-add-next-checker 'javascript-eslint 'tsx-tide)))
+)
+
 (after! web-mode
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-markup-indent-offset 4)
