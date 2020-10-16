@@ -79,8 +79,9 @@
 ;; expand-region
 (global-set-key "\M-s" 'er/expand-region)
 
-;; projectile-find-file
+;; projectile and dired
 (global-set-key (kbd "C-t") 'projectile-find-file)
+(global-set-key (kbd "C-x C-j") 'dired-jump)
 (after! dired
   (define-key dired-mode-map (kbd "C-t") 'projectile-find-file)
   (setq! dired-listing-switches "-ahl -v")
