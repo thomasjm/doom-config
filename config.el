@@ -22,6 +22,7 @@
 (global-set-key (kbd "M-h") 'backward-kill-word)
 (global-set-key (kbd "C-M-h") 'backward-kill-sexp)
 (global-set-key (kbd "C-j") 'newline-and-indent)
+(global-set-key (kbd "C-e") 'move-end-of-line)
 
 ;; ace-jump-mode
 (global-set-key (kbd "C-0") 'ace-jump-mode)
@@ -51,7 +52,7 @@
 (global-set-key (kbd "C-x C-p") 'flycheck-previous-error)
 
 ;; modes
-(whole-line-or-region-mode)
+(whole-line-or-region-global-mode)
 (global-subword-mode)
 
 ;; projectile-helm-ag
@@ -108,23 +109,27 @@
   )
 
 (add-hook! 'haskell-mode-hook
-  (defun haskell-sort-imports()
+  (defun custom-sort-haskell-imports()
     (interactive)
     (save-excursion
-      (beginning-of-buffer)
+      (goto-char (point-min))
       ;; Sort the initial import block
       (when (search-forward "import" nil t)
         (beginning-of-line)
         (haskell-sort-imports)
         )
       ;; Sort any following import blocks
-      (while (search-forward "
-import" nil t)
-        (beginning-of-line)
-        (haskell-sort-imports)
-        ))
+      ;; (while (search-forward "
+;; import" nil t)
+;;         (beginning-of-line)
+;;         (custom-sort-haskell-imports)
+;;         )
+      )
     )
+
+  (set-formatter! 'haskell-format-imports 'custom-sort-haskell-imports :modes '(haskell-mode))
   )
+(add-hook! 'haskell-mode-hook #'format-all-mode)
 
 (after! ibuffer-vc
   (add-hook! 'ibuffer-hook
@@ -173,6 +178,8 @@ import" nil t)
   (setq company-bg-color (face-attribute 'default :background))
 
   (add-to-list 'company-backends 'company-files)
+
+  (setq company-idle-delay 0)
 
   (custom-set-faces
    '(company-preview-common ((t (:background "#21e824bc35b0"))))
@@ -237,3 +244,6 @@ import" nil t)
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(use-package! dhall-mode
+  :mode "\\.dhall$")

@@ -9,6 +9,7 @@
 (package! zoom-window)
 (package! back-button)
 (package! ibuffer-vc)
+(package! dhall-mode)
 
 ;; (package! auto-highlight-symbol-hydra :recipe '(:host github
 ;;                                                 :repo "bgwines/auto-highlight-symbol-hydra"))
