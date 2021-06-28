@@ -2,6 +2,8 @@
 ;; (setq doom-theme 'doom-tomorrow-night)
 (setq doom-theme 'afternoon)
 
+(setq enable-local-variables t)
+
 ;; Transparency
 (set-frame-parameter (selected-frame) 'alpha '(90 90))
 (add-to-list 'default-frame-alist '(alpha 90 90))
@@ -45,7 +47,7 @@
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 ;; magit
-(global-set-key (kbd "<f8>") 'magit-status)
+(global-set-key (kbd "C-m") 'magit-status)
 
 ;; next-error and previous-error
 (global-set-key (kbd "C-x C-n") 'flycheck-next-error)
@@ -104,9 +106,17 @@
 
 (after! haskell
   (setq haskell-interactive-popup-errors nil)
-  (setq haskell-process-suggest-remove-import-lines nil)
+  ;; (setq haskell-process-suggest-remove-import-lines nil)
   (define-key haskell-mode-map (kbd "C-c C-d") 'haskell-w3m-open-haddock)
+  (define-key haskell-indentation-mode-map (kbd "C-m") 'magit-status)
   )
+
+;; (after! nix
+;;   (message "SETTING UP NIX LSP STUFF")
+;;   (lsp-register-client
+;;    (make-lsp-client :new-connection (lsp-stdio-connection '("rnix-lsp"))
+;;                     :major-modes '(nix-mode)
+;;                     :server-id 'nix)))
 
 (add-hook! 'haskell-mode-hook
   (defun custom-sort-haskell-imports()
@@ -120,16 +130,18 @@
         )
       ;; Sort any following import blocks
       ;; (while (search-forward "
-;; import" nil t)
-;;         (beginning-of-line)
-;;         (custom-sort-haskell-imports)
-;;         )
+      ;; import" nil t)
+      ;;         (beginning-of-line)
+      ;;         (custom-sort-haskell-imports)
+      ;;         )
       )
     )
 
-  (set-formatter! 'haskell-format-imports 'custom-sort-haskell-imports :modes '(haskell-mode))
+  ;; (add-hook 'before-save-hook #'custom-sort-haskell-imports nil 'local)
+
+  ;; (set-formatter! 'haskell-format-imports 'custom-sort-haskell-imports :modes '(haskell-mode))
   )
-(add-hook! 'haskell-mode-hook #'format-all-mode)
+;; (add-hook! 'haskell-mode-hook #'format-all-mode)
 
 (after! ibuffer-vc
   (add-hook! 'ibuffer-hook
@@ -208,6 +220,10 @@
   ;; (flycheck-add-mode 'tsx-tide 'typescript-tsx-mode)
   ;; (add-hook 'typescript-tsx-mode-hook (lambda () (flycheck-add-next-checker 'javascript-eslint 'tsx-tide)))
 )
+
+;; (add-hook! 'typescript-tsx-mode-hook
+;;   (unless (locate-dominating-file default-directory ".prettierrc")
+;;     (format-all-mode -1)))
 
 (after! web-mode
   (setq web-mode-code-indent-offset 2)
