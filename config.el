@@ -88,7 +88,7 @@
   (setq! dired-listing-switches "-ahl -v")
   )
 
-;; projectile-find-file
+;; comment
 (global-set-key (kbd "M-;") 'whole-line-or-region-comment-dwim)
 
 (setq doom-modeline-buffer-file-name-style 'truncate-with-project)
@@ -174,6 +174,11 @@
   (setq! helm-buffers-sort-fn #'helm-fuzzy-matching-sort-fn-preserve-ties-order)
   )
 
+(after! projectile
+  ;; (setq! projectile-indexing-method 'alien)
+  (setq! projectile-require-project-root t)
+  )
+
 (after! company
   (setq company-bg-color (face-attribute 'default :background))
 
@@ -243,7 +248,7 @@
 (global-set-key (kbd "S-C-<down>") 'shrink-window)
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook! 'before-save-hook 'delete-trailing-whitespace)
 
 (use-package! dhall-mode
   :mode "\\.dhall$")
