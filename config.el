@@ -1,6 +1,6 @@
 
 ;; (setq doom-theme 'doom-tomorrow-night)
-(setq doom-theme 'afternoon)
+;; (setq doom-theme 'afternoon)
 
 (setq enable-local-variables t)
 
@@ -90,6 +90,10 @@
   (setq! dired-listing-switches "-ahl -v")
   )
 
+;; (after! lsp
+  (setq! lsp-enable-file-watchers nil)
+  ;; )
+
 ;; comment
 (global-set-key (kbd "M-;") 'whole-line-or-region-comment-dwim)
 
@@ -106,7 +110,7 @@
 
 (after! haskell
   (setq haskell-interactive-popup-errors nil)
-  ;; (setq haskell-process-suggest-remove-import-lines nil)
+  (setq haskell-process-suggest-remove-import-lines nil)
   (define-key haskell-mode-map (kbd "C-c C-d") 'haskell-w3m-open-haddock)
   (define-key haskell-indentation-mode-map (kbd "C-m") 'magit-status)
   )
