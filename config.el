@@ -122,29 +122,32 @@
 ;;                     :major-modes '(nix-mode)
 ;;                     :server-id 'nix)))
 
-(add-hook! 'haskell-mode-hook
+(after! haskell
   (defun custom-sort-haskell-imports()
     (interactive)
     (save-excursion
       (goto-char (point-min))
+
       ;; Sort the initial import block
       (when (search-forward "import" nil t)
         (beginning-of-line)
         (haskell-sort-imports)
         )
+
       ;; Sort any following import blocks
-      ;; (while (search-forward "
-      ;; import" nil t)
-      ;;         (beginning-of-line)
-      ;;         (custom-sort-haskell-imports)
-      ;;         )
+      (while (search-forward "
+        import" nil t)
+        (beginning-of-line)
+        (custom-sort-haskell-imports)
+        )
       )
     )
 
-  ;; (add-hook 'before-save-hook #'custom-sort-haskell-imports nil 'local)
-
+  (add-hook! 'haskell-mode-hook
+    (add-hook! 'before-save-hook #'custom-sort-haskell-imports))
   ;; (set-formatter! 'haskell-format-imports 'custom-sort-haskell-imports :modes '(haskell-mode))
   )
+
 ;; (add-hook! 'haskell-mode-hook #'format-all-mode)
 
 (after! ibuffer-vc
@@ -218,6 +221,11 @@
   (setq typescript-indent-level 2)
   (setq js-indent-level 2)
   )
+
+(add-hook! 'json-mode-hook
+  (lambda ()
+    (make-local-variable 'js-indent-level)
+    (setq js-indent-level 2)))
 
 (after! (:and flycheck typescript-mode) ;; typescript-tsx-mode
   (message "SETTING UP TSX MODE STUFF")
