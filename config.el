@@ -278,5 +278,7 @@
 
 (add-hook! 'before-save-hook 'delete-trailing-whitespace)
 
+(setq indent-tabs-mode nil)
+
 (use-package! dhall-mode
   :mode "\\.dhall$")

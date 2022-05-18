@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: styled-div
+# key: styled
+# --
+const Root = styled("div")(({theme}) => ({
+
+}));
