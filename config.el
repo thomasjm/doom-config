@@ -158,7 +158,7 @@
         (ibuffer-do-sort-by-alphabetic)))))
 
 (after! smartparens
-  (load "/home/tom/doom-config/my-smartparens.el")
+  (load! "my-smartparens.el")
   )
 
 (global-set-key (kbd "M-z") 'zap-up-to-char)
