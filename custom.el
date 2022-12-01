@@ -24,7 +24,57 @@
  '(rustic-ansi-faces
    ["#282828" "#fb4934" "#b8bb26" "#fabd2f" "#83a598" "#cc241d" "#8ec07c" "#ebdbb2"])
  '(safe-local-variable-values
-   '((haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-test:lib" "codedown-tests-unit:exe:codedown-tests-unit" "codedown-server:lib" "codedown-server-types:lib")
+   '((haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-test:lib" "codedown-tests-server:exe:codedown-tests-server")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-test:lib" "codedown-tests-lsp:exe:codedown-tests-lsp")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-core:lib" "codedown-test:lib" "codedown-tests-regular:exe:codedown-tests-regular")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-core:lib" "codedown-test:lib" "codedown-tests-unit:lib" "codedown-tests-unit:exe:codedown-tests-unit")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-server:lib" "codedown-test:lib" "codedown-tests-regular:exe:codedown-tests-regular")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "--stack-yaml" "/home/tom/codedown/stack.yaml" "ot:lib" "ot:tests")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-test:lib" "codedown-tests-stress:exe:codedown-tests-stress")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-tests-app:exe:codedown-tests-app")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-test:lib" "codedown-tests-app:exe:codedown-tests-app")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-test:lib" "codedown-tests-widgets:exe:codedown-tests-widgets")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-test:lib" "codedown-tests-app-collaboration:exe:codedown-tests-app-collaboration")
+     (eval add-hook 'before-save-hook 'time-stamp)
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-core:lib" "codedown-test:lib" "codedown-tests-collaboration:exe:codedown-tests-collaboration")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-test:lib" "codedown-tests-collaboration:exe:codedown-tests-collaboration")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-core:lib" "codedown-test:lib" "codedown-tests-unit:exe:codedown-tests-unit")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-test:lib" "codedown-tests-cypress:exe:codedown-tests-cypress")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-test:lib" "codedown-tests-selenium:exe:codedown-tests-selenium")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "--stack-yaml" "/home/tom/codedown/stack.yaml" "codedown-core:lib" "codedown-core:exe:nix-event-parser")
+     (eval setenv "PATH"
+           (concat
+            (getenv "PATH")
+            ":"
+            (substring
+             (shell-command-to-string "nix-instantiate --eval --expr 'let pkgs = import \"/home/tom/codedown/nix/pinned-nixpkgs.nix\" {}; in with pkgs; lib.makeBinPath [openjdk11 kubectl kind kubernetes-helm firefox emptyMetaChrome chromedriver firefox geckodriver]'")
+             1 -2)))
+     (eval setq exec-path
+           (append exec-path
+                   (split-string
+                    (substring
+                     (shell-command-to-string "nix-instantiate --eval --expr 'let pkgs = import \"/home/tom/codedown/nix/pinned-nixpkgs.nix\" {}; in with pkgs; lib.makeBinPath [openjdk11 kubectl kind kubernetes-helm firefox emptyMetaChrome chromedriver firefox geckodriver]'")
+                     1 -2)
+                    ":")))
+     (eval setenv "PATH"
+           (concat
+            (getenv "PATH")
+            ":/nix/store/lvmz1yy4v20f0c7rg55bhfxwiaqfi2rj-openjdk-11.0.12+7/bin:/nix/store/z971rmnsv5nzp0drvcm49r549kcm94ci-kubectl-1.22.2/bin:/nix/store/gxqfzw8ai9hs8xnvdgdx2xxc4jdk1dw8-kind-0.11.1/bin:/nix/store/v01nyfwprws3dv99wcpbgqxq7pwww4gg-helm-3.7.0/bin:/nix/store/91fw6fkfg200f1jgrc0q3p84ysq6l960-firefox-93.0/bin:/nix/store/gs47dmc8r6z1krfhw22cc15kvmd04gff-wrapped-chrome/bin:/nix/store/r4z13h3dp8ajzwwxpf4i4pq50kf29ccj-chromedriver-95.0.4638.17/bin:/nix/store/91fw6fkfg200f1jgrc0q3p84ysq6l960-firefox-93.0/bin:/nix/store/75yhrcjj0ymrb08bal9wyyvlndfzq47v-geckodriver-0.29.1/bin"))
+     (eval setq exec-path
+           (append exec-path
+                   '("/nix/store/lvmz1yy4v20f0c7rg55bhfxwiaqfi2rj-openjdk-11.0.12+7/bin" "/nix/store/z971rmnsv5nzp0drvcm49r549kcm94ci-kubectl-1.22.2/bin" "/nix/store/gxqfzw8ai9hs8xnvdgdx2xxc4jdk1dw8-kind-0.11.1/bin" "/nix/store/v01nyfwprws3dv99wcpbgqxq7pwww4gg-helm-3.7.0/bin" "/nix/store/91fw6fkfg200f1jgrc0q3p84ysq6l960-firefox-93.0/bin" "/nix/store/gs47dmc8r6z1krfhw22cc15kvmd04gff-wrapped-chrome/bin" "/nix/store/r4z13h3dp8ajzwwxpf4i4pq50kf29ccj-chromedriver-95.0.4638.17/bin" "/nix/store/91fw6fkfg200f1jgrc0q3p84ysq6l960-firefox-93.0/bin" "/nix/store/75yhrcjj0ymrb08bal9wyyvlndfzq47v-geckodriver-0.29.1/bin")))
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-test:lib" "codedown-tests-demo:exe:codedown-tests-demo" "codedown-server:lib" "codedown-server-types:lib")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "--stack-yaml" "/home/tom/codedown/stack.yaml" "codedown-core:lib" "codedown-server-types:lib" "codedown-server-openapi:lib")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "--stack-yaml" "/home/tom/codedown/stack.yaml" "codedown-core:lib" "codedown-server-types:lib" "codedown-server-typescript:lib")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "--stack-yaml" "/home/tom/codedown/stack.yaml" "resource-map:lib" "codedown-core:lib")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "--stack-yaml" "/home/tom/codedown/stack.yaml" "codedown-runner:lib" "codedown-runner:exe:codedown-runner" "codedown-core:lib")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "--stack-yaml" "/home/tom/codedown/stack.yaml" "codedown-mounter-process:lib")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-test:lib" "codedown-server-types:lib")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-test:lib" "codedown-tests-app-selenium:exe:codedown-tests-app-selenium")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "--stack-yaml" "/home/tom/codedown/stack.yaml" "codedown-core:lib" "codedown-store-operator:lib")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "--stack-yaml" "/home/tom/codedown/stack.yaml" "codedown-runner:exe:codedown-runner" "codedown-core:lib")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "--stack-yaml" "/home/tom/codedown/stack.yaml" "codedown-runner:exe:codedown-runner")
+     (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-test:lib" "codedown-tests-unit:exe:codedown-tests-unit" "codedown-server:lib" "codedown-server-types:lib")
      (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-test:lib" "codedown-tests-unit:exe:codedown-tests-unit" "codedown-server:lib")
      (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "codedown-test:lib" "codedown-tests-unit:exe:codedown-tests-unit")
      (haskell-process-args-stack-ghci "--ghci-options=-ferror-spans" "--no-build" "--no-load" "--stack-yaml" "/home/tom/codedown/stack.yaml" "codedown-mounter:lib" "codedown-mounter:exe:codedown-mounter" "codedown-core:lib")

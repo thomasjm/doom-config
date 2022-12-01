@@ -10,6 +10,7 @@
 (package! back-button)
 (package! ibuffer-vc)
 (package! dhall-mode)
+(package! nix-update)
 
 ;; (package! auto-highlight-symbol-hydra :recipe '(:host github
 ;;                                                 :repo "bgwines/auto-highlight-symbol-hydra"))
