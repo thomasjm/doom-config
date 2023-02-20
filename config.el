@@ -34,10 +34,10 @@
 (defun new-scratch ()
   "open up a guaranteed new scratch buffer"
   (interactive)
-  (switch-to-buffer (loop for num from 0
-                          for name = (format "scratch-%03i" num)
-                          while (get-buffer name)
-                          finally return name)))
+  (switch-to-buffer (cl-loop for num from 0
+                             for name = (format "scratch-%03i" num)
+                             while (get-buffer name)
+                             finally return name)))
 (global-set-key (kbd "<f7>") 'new-scratch)
 
 ;; Multiple cursors
@@ -148,8 +148,6 @@
   ;; (set-formatter! 'haskell-format-imports 'custom-sort-haskell-imports :modes '(haskell-mode))
   )
 
-;; (add-hook! 'haskell-mode-hook #'format-all-mode)
-
 (after! ibuffer-vc
   (add-hook! 'ibuffer-hook
     (lambda ()
@@ -158,7 +156,9 @@
         (ibuffer-do-sort-by-alphabetic)))))
 
 (after! smartparens
-  (load! "my-smartparens.el")
+  (sp-use-paredit-bindings)
+  (define-key smartparens-mode-map (kbd "C-<left>") 'back-button-global-backward)
+  (define-key smartparens-mode-map (kbd "C-<right>") 'back-button-global-forward)
   )
 
 (global-set-key (kbd "M-z") 'zap-up-to-char)
@@ -268,11 +268,6 @@
 
 (global-set-key (kbd "C-<left>") 'back-button-global-backward)
 (global-set-key (kbd "C-<right>") 'back-button-global-forward)
-
-(after! smartparens-mode
-  (define-key sp-keymap (kbd "C-<left>") 'back-button-global-backward)
-  (define-key sp-keymap (kbd "C-<right>") 'back-button-global-forward)
-  )
 
 (global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
 (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
