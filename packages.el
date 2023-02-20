@@ -10,7 +10,7 @@
 (package! back-button)
 (package! ibuffer-vc)
 (package! dhall-mode)
-(package! nix-update)
+(package! nix-update :pin "aab70a38165575a9cb41726f1cc67df60fbf2832")
 
 ;; (package! auto-highlight-symbol-hydra :recipe '(:host github
 ;;                                                 :repo "bgwines/auto-highlight-symbol-hydra"))

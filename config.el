@@ -218,8 +218,10 @@
   )
 
 (after! typescript-mode
+  (message "SETTING UP TYPESCRIPT-MODE")
   (setq typescript-indent-level 2)
   (setq js-indent-level 2)
+  (setq web-mode-markup-indent-offset 4)
   )
 
 (add-hook! 'json-mode-hook
@@ -228,7 +230,7 @@
     (setq js-indent-level 2)))
 
 (after! (:and flycheck typescript-mode) ;; typescript-tsx-mode
-  (message "SETTING UP TSX MODE STUFF")
+  (message "SETTING UP TSX MODE")
   ;; (flycheck-add-mode 'tsx-tide 'typescript-tsx-mode)
   ;; (add-hook 'typescript-tsx-mode-hook (lambda () (flycheck-add-next-checker 'javascript-eslint 'tsx-tide)))
 )
@@ -237,7 +239,8 @@
 ;;   (unless (locate-dominating-file default-directory ".prettierrc")
 ;;     (format-all-mode -1)))
 
-(after! web-mode
+(after! (:or web-mode typescript-tsx-mode)
+  (message "SETTING UP WEB-MODE")
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-markup-indent-offset 4)
   (define-key web-mode-map (kbd "M-/") nil)
@@ -275,6 +278,9 @@
 (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "S-C-<down>") 'shrink-window)
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
+
+(global-set-key (kbd "M-=") 'doom/increase-font-size)
+(global-set-key (kbd "M--") 'doom/decrease-font-size)
 
 (add-hook! 'before-save-hook 'delete-trailing-whitespace)
 
