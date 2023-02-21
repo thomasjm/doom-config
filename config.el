@@ -157,8 +157,11 @@
 
 (after! smartparens
   (sp-use-paredit-bindings)
-  (define-key smartparens-mode-map (kbd "C-<left>") 'back-button-global-backward)
-  (define-key smartparens-mode-map (kbd "C-<right>") 'back-button-global-forward)
+
+  ;; Clear certain keys we want to use for other things
+  (define-key smartparens-mode-map (kbd "M-j") nil)
+  (define-key smartparens-mode-map (kbd "C-<left>") nil)
+  (define-key smartparens-mode-map (kbd "C-<right>") nil)
   )
 
 (global-set-key (kbd "M-z") 'zap-up-to-char)
