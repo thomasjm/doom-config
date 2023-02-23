@@ -160,6 +160,7 @@
 
   ;; Clear certain keys we want to use for other things
   (define-key smartparens-mode-map (kbd "M-j") nil)
+  (define-key smartparens-mode-map (kbd "M-s") nil)
   (define-key smartparens-mode-map (kbd "C-<left>") nil)
   (define-key smartparens-mode-map (kbd "C-<right>") nil)
   )
