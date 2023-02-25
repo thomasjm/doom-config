@@ -4,6 +4,11 @@
 
 (setq enable-local-variables t)
 
+;; Doom uses dtrt-indent-mode, which doesn't work well in web-mode when multiple
+;; indentation styles are present (i.e. for code vs. JSX)
+(add-to-list 'doom-detect-indentation-excluded-modes 'web-mode)
+(add-to-list 'doom-detect-indentation-excluded-modes 'typescript-tsx-mode)
+
 ;; Transparency
 (set-frame-parameter (selected-frame) 'alpha '(90 90))
 (add-to-list 'default-frame-alist '(alpha 90 90))
