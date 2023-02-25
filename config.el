@@ -158,6 +158,11 @@
 (after! smartparens
   (sp-use-paredit-bindings)
 
+  ;; Custom keys
+  (define-key smartparens-mode-map (kbd "M-<backspace>") 'sp-backward-unwrap-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-k") 'sp-kill-sexp)
+  (define-key smartparens-mode-map (kbd "C-M-w") 'sp-copy-sexp)
+
   ;; Clear certain keys we want to use for other things
   (define-key smartparens-mode-map (kbd "M-j") nil)
   (define-key smartparens-mode-map (kbd "M-s") nil)
