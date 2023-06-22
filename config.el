@@ -148,8 +148,14 @@
       )
     )
 
-  (add-hook! 'haskell-mode-hook
-    (add-hook! 'before-save-hook #'custom-sort-haskell-imports))
+  ;; (add-hook! 'haskell-mode-hook
+  ;;   (add-hook! 'before-save-hook #'custom-sort-haskell-imports))
+
+  (defun my-haskell-mode-before-save-hook ()
+    (when (eq major-mode 'haskell-mode)
+      (custom-sort-haskell-imports)))
+  (add-hook 'before-save-hook #'my-haskell-mode-before-save-hook)
+
   ;; (set-formatter! 'haskell-format-imports 'custom-sort-haskell-imports :modes '(haskell-mode))
   )
 
@@ -231,30 +237,20 @@
    )
   )
 
-(after! typescript-mode
-  (message "SETTING UP TYPESCRIPT-MODE")
-  (setq typescript-indent-level 2)
-  (setq js-indent-level 2)
-  (setq web-mode-markup-indent-offset 4)
-  )
-
 (add-hook! 'json-mode-hook
   (lambda ()
     (make-local-variable 'js-indent-level)
     (setq js-indent-level 2)))
 
-(after! (:and flycheck typescript-mode) ;; typescript-tsx-mode
-  (message "SETTING UP TSX MODE")
-  ;; (flycheck-add-mode 'tsx-tide 'typescript-tsx-mode)
-  ;; (add-hook 'typescript-tsx-mode-hook (lambda () (flycheck-add-next-checker 'javascript-eslint 'tsx-tide)))
-)
-
 ;; (add-hook! 'typescript-tsx-mode-hook
 ;;   (unless (locate-dominating-file default-directory ".prettierrc")
 ;;     (format-all-mode -1)))
 
-(after! (:or web-mode typescript-tsx-mode)
-  (message "SETTING UP WEB-MODE")
+(after! (:or typescript-mode typescript-tsx-mode)
+  (setq typescript-indent-level 2)
+  )
+
+(after! web-mode
   (setq web-mode-code-indent-offset 2)
   (setq web-mode-markup-indent-offset 4)
   (define-key web-mode-map (kbd "M-/") nil)
