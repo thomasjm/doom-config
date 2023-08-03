@@ -94,6 +94,8 @@
   (define-key dired-mode-map (kbd "C-t") 'projectile-find-file)
   (setq! dired-listing-switches "-ahl -v")
   )
+(after! projectile
+  (add-to-list 'projectile-globally-ignored-directories "*\\.stack-work"))
 
 ;; (after! lsp
   (setq! lsp-enable-file-watchers nil)
