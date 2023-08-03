@@ -287,6 +287,8 @@
 (global-set-key (kbd "M-=") 'doom/increase-font-size)
 (global-set-key (kbd "M--") 'doom/decrease-font-size)
 
+(global-set-key (kbd "M-o") 'hs-toggle-hiding)
+
 (add-hook! 'before-save-hook 'delete-trailing-whitespace)
 
 (setq indent-tabs-mode nil)
