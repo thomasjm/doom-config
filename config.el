@@ -31,9 +31,7 @@
 (global-set-key (kbd "C-j") 'newline-and-indent)
 (global-set-key (kbd "C-e") 'move-end-of-line)
 
-;; ace-jump-mode
-(global-set-key (kbd "C-0") 'ace-jump-mode)
-(global-set-key (kbd "C-9") 'ace-jump-line-mode)
+(global-set-key (kbd "C-0") '+format/buffer)
 
 ;; Scratch
 (defun new-scratch ()
