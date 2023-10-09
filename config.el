@@ -96,6 +96,7 @@
   (add-to-list 'projectile-globally-ignored-directories "*.stack-work")
   (add-to-list 'projectile-globally-ignored-directories "*test_runs")
   (add-to-list 'projectile-globally-ignored-directories "*node_modules")
+  (add-to-list 'projectile-globally-ignored-directories "*dist")
   )
 
 ;; (after! lsp
