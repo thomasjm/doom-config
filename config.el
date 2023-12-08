@@ -256,7 +256,7 @@
 
 (after! web-mode
   (setq web-mode-code-indent-offset 2)
-  (setq web-mode-markup-indent-offset 4)
+  (setq web-mode-markup-indent-offset 2)
   (define-key web-mode-map (kbd "M-/") nil)
   (define-key web-mode-map (kbd "TAB") 'indent-for-tab-command)
   (define-key emmet-mode-keymap (kbd "TAB") 'indent-for-tab-command)
