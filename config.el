@@ -60,24 +60,7 @@
 (whole-line-or-region-global-mode)
 (global-subword-mode)
 
-;; projectile-helm-ag
-(defun projectile-helm-ag (arg)
-  "Run helm-do-ag relative to the project root.  Or, with prefix arg ARG, relative to the current directory."
-  (interactive "P")
-  (if arg
-      (progn
-        ;; Have to kill the prefix arg so it doesn't get forwarded
-        ;; and screw up helm-do-ag
-        (set-variable 'current-prefix-arg nil)
-
-        (if dired-directory
-            (helm-do-ag dired-directory)
-          (helm-do-ag (file-name-directory (buffer-file-name)))
-          )
-        )
-    (helm-do-ag (projectile-project-root))
-    ))
-(global-set-key (kbd "C-x C-r") 'projectile-helm-ag)
+(global-set-key (kbd "C-x C-r") 'helm-projectile-rg)
 
 ;; Disable line numbers
 (setq display-line-numbers-type nil)
