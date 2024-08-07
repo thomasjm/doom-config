@@ -60,7 +60,24 @@
 (whole-line-or-region-global-mode)
 (global-subword-mode)
 
-(global-set-key (kbd "C-x C-r") 'helm-projectile-rg)
+;; projectile-helm-ag
+(defun projectile-helm-ag (arg)
+  "Same as helm-projectile-ag, but searches relative to the current directory with a prefix arg."
+  (interactive "P")
+  (if arg
+      (progn
+        ;; Have to kill the prefix arg so it doesn't get forwarded
+        ;; and screw up helm-do-ag
+        (set-variable 'current-prefix-arg nil)
+
+        (if dired-directory
+            (helm-do-ag dired-directory)
+          (helm-do-ag (file-name-directory (buffer-file-name)))
+          )
+        )
+    (helm-projectile-ag)
+    ))
+(global-set-key (kbd "C-x C-r") 'projectile-helm-ag)
 
 ;; Disable line numbers
 (setq display-line-numbers-type nil)
