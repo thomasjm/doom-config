@@ -62,7 +62,7 @@
 
 ;; projectile-helm-ag
 (defun projectile-helm-ag (arg)
-  "Run helm-do-ag relative to the project root.  Or, with prefix arg ARG, relative to the current directory."
+  "Same as helm-projectile-ag, but searches relative to the current directory with a prefix arg."
   (interactive "P")
   (if arg
       (progn
@@ -75,7 +75,7 @@
           (helm-do-ag (file-name-directory (buffer-file-name)))
           )
         )
-    (helm-do-ag (projectile-project-root))
+    (helm-projectile-ag)
     ))
 (global-set-key (kbd "C-x C-r") 'projectile-helm-ag)
 
