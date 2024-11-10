@@ -252,6 +252,9 @@
 
 (after! (:or typescript-mode typescript-tsx-mode)
   (setq typescript-indent-level 2)
+  (set-formatter! 'format-imports '(npx "format-imports") :modes '(typescript-mode typescript-tsx-mode))
+  (setq apheleia-hide-log-buffers nil)
+  (setq apheleia-log-only-errors nil)
   )
 
 (after! web-mode
