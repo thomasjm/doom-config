@@ -302,3 +302,7 @@
 
 (use-package! dhall-mode
   :mode "\\.dhall$")
+
+; macOS
+(setq mac-command-modifier 'meta)
+(setq mac-pass-command-to-system nil)
