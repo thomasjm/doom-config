@@ -14,6 +14,15 @@
 ;;      Alternatively, press 'gd' (or 'C-c c d') on a module to browse its
 ;;      directory (for easy access to its source code).
 
+;; If we keep our DOOMDIR in the Nix store, Emacs will be unable to write to
+;; custom.el.
+(setq custom-file "~/.config/emacs-custom.el")
+(unless (file-exists-p "~/.config")
+  (make-directory "~/.config"))
+(unless (file-exists-p custom-file)
+  (write-region "" nil custom-file))
+(load custom-file)
+
 (doom! :input
        ;;chinese
        ;;japanese
