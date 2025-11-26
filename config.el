@@ -49,6 +49,22 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
+; Map some escape sequences also, which we can encode in some terminal
+; emulators, since terminals don't actually distinguish things like C->
+
+;; (define-key input-decode-map "\e[27;6;46~" [C->])
+;; (define-key input-decode-map "\e[27;6;44~" [C-<])
+
+;; (global-set-key (kbd "ESC [ 2 7 ; 6 ; 4 6 ~") 'mc/mark-next-like-this)
+;; (global-set-key (kbd "ESC [ 2 7 ; 6 ; 4 4 ~") 'mc/mark-previous-like-this)
+
+; Use the vector syntax instead of [C->]
+(define-key input-decode-map "\e[27;6;46~" [(control shift ?.)])
+(define-key input-decode-map "\e[27;6;44~" [(control shift ?,)])
+; Then bind using the same vector syntax
+(global-set-key [(control shift ?.)] 'mc/mark-next-like-this)
+(global-set-key [(control shift ?,)] 'mc/mark-previous-like-this)
+
 ;; magit
 (global-set-key (kbd "C-m") 'magit-status)
 
