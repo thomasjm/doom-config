@@ -6,8 +6,9 @@
 
 ;; Doom uses dtrt-indent-mode, which doesn't work well in web-mode when multiple
 ;; indentation styles are present (i.e. for code vs. JSX)
-(add-to-list 'doom-detect-indentation-excluded-modes 'web-mode)
-(add-to-list 'doom-detect-indentation-excluded-modes 'typescript-tsx-mode)
+(after! whitespace
+  (add-to-list '+whitespace-guess-excluded-modes 'web-mode)
+  (add-to-list '+whitespace-guess-excluded-modes 'typescript-tsx-mode))
 
 ;; Transparency
 (set-frame-parameter (selected-frame) 'alpha '(90 90))
