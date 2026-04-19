@@ -2,6 +2,8 @@
 ;; (setq doom-theme 'doom-tomorrow-night)
 ;; (setq doom-theme 'afternoon)
 
+(setq doom-font (font-spec :family "UbuntuMono Nerd Font" :size 14))
+
 (setq enable-local-variables t)
 
 ;; Doom uses dtrt-indent-mode, which doesn't work well in web-mode when multiple
@@ -211,6 +213,8 @@
 (global-visual-line-mode)
 
 ;; (speedbar-add-supported-extension ".hs")
+
+(setq helm-projectile-set-input-automatically nil)
 
 (after! helm
   ;; Default green selection color is hideous
