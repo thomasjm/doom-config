@@ -229,10 +229,14 @@
     )
   (global-set-key (kbd "C-c C-f") 'helm-find-files-in-root)
 
+  (setq helm-move-to-line-cycle-in-source nil)
   ;; (add-to-list 'completion-styles 'flex)
   ;; (setq completion-styles '(flex))
   ;; (setq helm-completion-style 'helm-fuzzy)
   )
+
+;; Workaround because we were seeing https://github.com/doomemacs/doomemacs/issues/4196
+(map! "C-x b" #'switch-to-buffer)
 
 (after! (:and helm helm-buffers)
   (setq! helm-buffers-sort-fn #'helm-fuzzy-matching-sort-fn-preserve-ties-order)
