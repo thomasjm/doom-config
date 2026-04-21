@@ -79,8 +79,8 @@
 (whole-line-or-region-global-mode)
 (global-subword-mode)
 
-;; projectile-helm-ag
-(defun projectile-helm-ag (arg)
+;; my/helm-projectile-rg
+(defun my/helm-projectile-rg (arg)
   "Same as helm-projectile-ag, but searches relative to the current directory with a prefix arg."
   (interactive "P")
   (if arg
@@ -90,13 +90,13 @@
         (set-variable 'current-prefix-arg nil)
 
         (if dired-directory
-            (helm-do-ag dired-directory)
-          (helm-do-ag (file-name-directory (buffer-file-name)))
+            ((helm-projectile--rg-1 dired-directory (helm-projectile-rg--region-selection)))
+          (helm-projectile--rg-1 (file-name-directory (buffer-file-name)) (helm-projectile-rg--region-selection))
           )
         )
-    (helm-projectile-ag)
+    (helm-projectile-rg)
     ))
-(global-set-key (kbd "C-x C-r") 'projectile-helm-ag)
+(global-set-key (kbd "C-x C-r") 'my/helm-projectile-rg)
 
 ;; Disable line numbers
 (setq display-line-numbers-type nil)
