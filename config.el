@@ -90,7 +90,7 @@
         (set-variable 'current-prefix-arg nil)
 
         (if dired-directory
-            ((helm-projectile--rg-1 dired-directory (helm-projectile-rg--region-selection)))
+            (helm-projectile--rg-1 dired-directory (helm-projectile-rg--region-selection))
           (helm-projectile--rg-1 (file-name-directory (buffer-file-name)) (helm-projectile-rg--region-selection))
           )
         )
@@ -289,6 +289,12 @@
   (define-key web-mode-map (kbd "TAB") 'indent-for-tab-command)
   (define-key emmet-mode-keymap (kbd "TAB") 'indent-for-tab-command)
   )
+
+(after! helm-rg
+  (defun helm-rg--header-name (_src-name)
+    (format "%s @ %s"
+            (helm-rg--make-face 'helm-rg-title-face "rg")
+            (helm-rg--make-face 'helm-rg-directory-header-face helm-rg--current-dir))))
 
 (after! helm-swoop
   (global-set-key (kbd "C-c C-o") 'helm-swoop)
