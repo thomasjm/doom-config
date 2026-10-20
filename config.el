@@ -70,6 +70,7 @@
 
 ;; magit
 (global-set-key (kbd "C-m") 'magit-status)
+(global-set-key (kbd "<f12>") 'magit-status)
 
 ;; next-error and previous-error
 (global-set-key (kbd "C-x C-n") 'flycheck-next-error)
