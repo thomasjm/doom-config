@@ -72,6 +72,17 @@
 (global-set-key (kbd "C-m") 'magit-status)
 (global-set-key (kbd "<f12>") 'magit-status)
 
+(after! magit
+  (defun my/magit-submodule-update-all ()
+    "Run `git submodule update --init --recursive' in the current repository."
+    (interactive)
+    (magit-with-toplevel
+      (magit-run-git-async "submodule" "update" "--init" "--recursive")))
+
+  (transient-append-suffix 'magit-submodule "u"
+    '("U" "Update all     git submodule update --init --recursive"
+      my/magit-submodule-update-all)))
+
 ;; next-error and previous-error
 (global-set-key (kbd "C-x C-n") 'flycheck-next-error)
 (global-set-key (kbd "C-x C-p") 'flycheck-previous-error)
